@@ -1,0 +1,119 @@
+﻿/*body {
+    font-family: Arial;
+    width: auto;
+    height: auto;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+.navbar {
+    background-color: pink;
+    position: fixed;
+    width: auto;
+    height: 60px;
+}
+
+h1{
+    font-size: 40px;
+    font-family: Arial;
+    color: palevioletred;
+    text-align: center;
+}
+
+div.container {
+    margin: 4px, 4px;
+    padding: 4px;
+    text-align: justify;
+}
+
+header {
+    width: 1265px;
+    height: 70px;
+}
+
+.footer {
+    position: relative;
+    bottom: 0;
+    width: 100%;
+    white-space: nowrap;
+    line-height: 40px;  Vertically center the text there
+    background-color: pink;
+}
+
+h5 {
+    font-weight: bold;
+}
+
+.footer-copyright {
+    background-color: palevioletred;
+}
+
+.btn1{
+    margin: 8px;
+}
+
+.btn2{
+    margin: 8px;
+    float: right;
+}
+
+.btn3{
+    margin: 8px;
+    float: left;
+}*/
+
+    /**{
+        border: 2px solid #ddd;
+        padding: 10px;
+        margin: 10px;
+    }
+    html{
+        margin: 0;
+        padding: 0;
+    }
+    body{
+        max-width: 800px;
+        margin: 30px auto;
+    }
+    ini mengubah warna background untuk semua tag <p>
+    p{
+        background-color: pink;
+    }
+
+    ini mengubah warna background untuk semua tag <p class="p1"> atau si Paragraf 1
+    .p1 {
+        background-color: pink;
+    }
+
+    ini mengubah warna background untuk Paragraf 4
+    p#a {
+    background-color: pink;
+    }
+
+    ini mengubah warna background untuk Paragraf 4 dengan lebih spesifik
+    .container section#b p#a {
+    background-color: pink;
+    }
+
+    ini mengubah warna background List 2
+    .list:nth-child(2){
+        background-color: aquamarine;
+    }
+
+    ini mengubah warna background List 2 saat kursor diarahkan ke list tersebut
+    .list:nth-child(2):hover {
+        background-color: aquamarine;
+    }
+
+    p{
+        background-color: pink;
+    }
+
+    ini mengubah warna background Halo
+    p#a{
+        background-color: orange;
+    }
+    ini Paragraf 4 harusnya warnanya tetep biru kaya Halo karena yang diutamakan untuk dieksekusi itu id="a" tapi karena dia pake !important maka dapat menimpa apapun yang terjadi
+    p.b{
+        background-color: aqua!important;
+    }*/
