@@ -1,4 +1,5 @@
-﻿using Client.Base.Urls;
+﻿using API.ViewModel;
+using Client.Base.Urls;
 using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
@@ -9,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace Client.Repositories.Data
 {
-    public class LoginRepository
+    public class LoginRepository : GeneralRepository<LoginVM, string>
     {
-        /*private readonly Address address;
+        private readonly Address address;
         private readonly string request;
-        private readonly HttpClient httpClient;*/
+        private readonly HttpClient httpClient;
 
-        /*public LoginRepository(Address address, string request = "Employees/")
+        public LoginRepository(Address address, string request = "Employees/") : base (address, request)
         {
             this.address = address;
             this.request = request;
@@ -23,8 +24,8 @@ namespace Client.Repositories.Data
             {
                 BaseAddress = new Uri(address.link)
             };
-        }*/
-        /*public async Task<JWTokenVM> Auth(Login login)
+        }
+        public async Task<JWTokenVM> Auth(LoginVM login)
         {
             JWTokenVM token = null;
 
@@ -35,6 +36,6 @@ namespace Client.Repositories.Data
             token = JsonConvert.DeserializeObject<JWTokenVM>(apiResponse);
 
             return token;
-        }*/
+        }
     }
 }

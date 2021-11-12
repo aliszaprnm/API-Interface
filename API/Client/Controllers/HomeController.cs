@@ -22,16 +22,6 @@ namespace Client.Controllers
         {
             return View();
         }
-        [Authorize]
-        public IActionResult Dashboard()
-        {
-            return View();
-        }
-        [Authorize]
-        public IActionResult DataTable()
-        {
-            return View();
-        }
         public IActionResult Login()
         {
             return View();
@@ -49,6 +39,16 @@ namespace Client.Controllers
             return View();
         }
         public IActionResult Privacy()
+        {
+            return View();
+        }
+        [Authorize]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+        [Authorize]
+        public IActionResult DataTable()
         {
             return View();
         }

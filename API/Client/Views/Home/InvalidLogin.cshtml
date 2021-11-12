@@ -10,11 +10,14 @@
         <img src="/img/pc.svg" />
     </div>
     <div class="login-container">
-        <form action="/Employees/Auth" method="post" id="asd" name="login">
+        <form action="/Login/Auth" method="post" id="asd" name="login">
             <img class="avator" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSq_I0JFO2DxoAV3J-sI7ajtx0qW0Q5neaY_A&usqp=CAU" />
             <h2>Sign In</h2>
-            <p style="color:red">Email or password is invalid.</p>
-            <p style="color:red">Please try again.</p>
+            @*<p style="color:red">Email or password is invalid.</p>
+        <p style="color:red">Please try again.</p>*@
+            <div class="alert alert-warning text-center">
+                Email or password is invalid. Please try again.
+            </div>
             <div class="input-div" one>
                 <div class="i">
                     <i class="fas fa-user"></i>

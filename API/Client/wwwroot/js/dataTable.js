@@ -437,6 +437,7 @@ function getbyID(nik) {
             $('#role').hide();
             $('#pwd').hide();
             $('#nik').hide();
+            /*$('#nik').prop('disabled', true);*/
         },
         error: function (errormessage) {
             /*alert(errormessage.responseText);*/
