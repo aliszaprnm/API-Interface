@@ -1,0 +1,255 @@
+﻿@{
+    ViewData["Title"] = "Data Table";
+    Layout = "_DataTable";
+}
+
+<h1 style="font-family: 'Bell MT'">Employee List</h1>
+<div class="card show mb-4" style="margin-top:40px; margin-bottom:10px; width:auto">
+    <div class="card-header py-3" style="background-color:lavender">
+        <button class="btn btn-info" data-toggle="modal" data-target="#formModal"><i class="fas fa-plus-square"></i>  Add Employee</button>
+        <button class="btn btn-success" onclick="exportToExcel()"><i class="fas fa-file-excel"></i> Excel</button>
+        <button class="btn btn-danger" onclick="exportToPdf()"><i class="fas fa-file-pdf"></i> PDF</button>
+    </div>
+    @*<p> </p>
+        <a href="" class="btn btn-info btn-sm">Add Employee</a>*@
+</div>
+
+<table class="table table-hover" id="employeeTable">
+    <thead>
+        <tr class="table-primary">
+            <th>No</th>
+            <th>NIK</th>
+            <th>Nama</th>
+            <th>Phone</th>
+            <th>Salary</th>
+            <th>Gender</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody id="tablePeople">
+    </tbody>
+</table>
+
+<!-- Form Modal -->
+<div class="modal fade bd-example-modal-xl" id="formModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regist">Data Employee</h5>
+                <button type="button" class="close" onclick="window.location.reload();" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form name="registration" id="formValidation">
+                    <div class="form-group" id="nik">
+                        <label for="inputNIK">NIK</label>
+                        <input type="text" class="form-control" id="inputNIK" name="inputNIK" placeholder="NIK">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputFirstName">First Name</label>
+                            <input type="text" class="form-control" id="inputFirstName" name="inputFirstName" placeholder="First Name">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputLastName">Last Name</label>
+                            <input type="text" class="form-control" id="inputLastName" name="inputLastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputPhone">Phone</label>
+                            <input type="text" class="form-control" id="inputPhone" name="inputPhone" placeholder="Phone">
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputGender">Gender</label>
+                            <select class="form-control" id="inputGender" name="inputGender">
+                                <option value="">-- Choose Gender --</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="inputBirthDate">Birth Date</label>
+                        <input type="date" class="form-control" id="inputBirthDate" name="inputBirthDate">
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="inputEmail">Email</label>
+                            <input type="email" class="form-control" id="inputEmail" name="inputEmail" placeholder="Email">
+                        </div>
+                        <div class="form-group col-md-6" id="pwd">
+                            <label for="inputPassword">Password</label>
+                            <input type="password" class="form-control" id="inputPassword" name="inputPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="inputGender">Gender</label><br />
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender-option" id="m" value="0" />
+                                <label class="form-check-label" for="m">Male</label>
+                            </div>
+                            <div class="form-check-inline">
+                                <input class="form-check-input" type="radio" name="gender-option" id="f" value="1" />
+                                <label class="form-check-label" for="f">Female</label>
+                            </div>
+                        </div>*@
+                    <div class="form-row">
+                        <div class="form-group col-md-6" id="univ">
+                            <label for="inputUniversity">University</label>
+                            <select name="inputUniversity" id="inputUniversity" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4" id="tingkat">
+                            <label for="inputDegree">Degree</label>
+                            <select class="form-control" id="inputDegree" name="inputDegree">
+                                <option value="">-- Choose Degree --</option>
+                                <option value="D1">D1</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                            </select>
+                            @*<input type="text" class="form-control" id="inputDegree" placeholder="Degree">*@
+                        </div>
+                        <div class="form-group col-md-2" id="ipk">
+                            <label for="inputGPA">GPA</label>
+                            <input type="text" class="form-control" id="inputGPA" name="inputGPA" placeholder="GPA">
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6" id="role">
+                            <label for="inputRole">Role</label>
+                            <select name="inputRole" id="inputRole" class="form-control">
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="inputSalary">Salary</label>
+                            <input type="text" class="form-control" id="inputSalary" name="inputSalary" placeholder="Salary">
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">Close</button>
+                <button type="submit" class="btn btn-primary" id="btnAdd">Add</button>
+                <button type="submit" style="display:none;" class="btn btn-primary" onclick="updateData()" id="btnUpdate">Update</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Detail Modal -->
+<div class="modal fade bd-example-modal-xl" id="detailModal" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="regist">Detail Data Employee</h5>
+                <button type="button" class="close" onclick="window.location.reload();" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="formDetail">
+                    <div class="form-group">
+                        <label for="dataNIK">NIK</label>
+                        <input type="text" class="form-control" id="dataNIK" name="dataNIK" placeholder="NIK" readonly>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataFirstName">First Name</label>
+                            <input type="text" class="form-control" id="dataFirstName" name="dataFirstName" placeholder="First Name" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dataLastName">Last Name</label>
+                            <input type="text" class="form-control" id="dataLastName" name="dataLastName" placeholder="Last Name" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataPhone">Phone</label>
+                            <input type="text" class="form-control" id="dataPhone" name="dataPhone" placeholder="Phone" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dataGender">Gender</label>
+                            <select class="form-control" id="dataGender" name="dataGender" readonly>
+                                <option value="">-- Choose Gender --</option>
+                                <option value="0">Male</option>
+                                <option value="1">Female</option>
+                            </select>
+                        </div>
+                    </div>
+                    @*<div class="form-group">
+                            <label for="dataBirthDate">Birth Date</label>
+                            <input type="date" class="form-control" id="dataBirthDate" name="dataBirthDate" readonly>
+                        </div>*@
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataEmail">Email</label>
+                            <input type="email" class="form-control" id="dataEmail" name="dataEmail" placeholder="Email" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dataBirthDate">Birth Date</label>
+                            <input type="date" class="form-control" id="dataBirthDate" name="dataBirthDate" readonly>
+                            @*<label for="dataPassword">Password</label>
+                                <input type="password" class="form-control" id="dataPassword" name="dataPassword" placeholder="Password" readonly>*@
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataUniversity">University</label>
+                            <select name="dataUniversity" id="dataUniversity" class="form-control" readonly>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="dataDegree">Degree</label>
+                            <select class="form-control" id="dataDegree" name="dataDegree" readonly>
+                                <option value="">-- Choose Degree --</option>
+                                <option value="D1">D1</option>
+                                <option value="D3">D3</option>
+                                <option value="D4">D4</option>
+                                <option value="S1">S1</option>
+                                <option value="S2">S2</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="dataGPA">GPA</label>
+                            <input type="text" class="form-control" id="dataGPA" name="dataGPA" placeholder="GPA" readonly>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="dataRole">Role</label>
+                            <select name="dataRole" id="dataRole" class="form-control" readonly>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="dataSalary">Salary</label>
+                            <input type="text" class="form-control" id="dataSalary" name="dataSalary" placeholder="Salary" readonly>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" onclick="window.location.reload();">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section scripts {
+    <script src="~/assets/vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/assets/vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/1.11.3/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/buttons/2.0.1/js/dataTables.buttons.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.html5.min.js"></script>
+    <script type="text/javascript" charset="utf-8" src="https://cdn.datatables.net/buttons/2.0.1/js/buttons.print.min.js"></script>
+
+    <!-- Page level custom scripts -->
+    <script src="~/assets/js/demo/datatables-demo.js"></script>
+
+}

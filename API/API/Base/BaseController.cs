@@ -27,7 +27,7 @@ namespace API.Base
             var getEntity = repository.Get();
             if (getEntity.ToList().Count > 0)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = getEntity, message = "Data berhasil ditampilkan" });
+                return Ok(getEntity);
             }
             else
             {
@@ -41,7 +41,7 @@ namespace API.Base
             var ada = repository.Get(key);
             if (ada != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = ada, message = "Data berhasil ditampilkan" });
+                return Ok(ada);
             }
             else
             {
@@ -84,7 +84,8 @@ namespace API.Base
             try
             {
                 var result = repository.Update(entity, key);
-                return Ok(new { status = HttpStatusCode.OK, message = "Data tersebut berhasil diupdate" });
+                /*return Ok(new { status = HttpStatusCode.OK, message = "Data tersebut berhasil diupdate" });*/
+                return Ok(result);
             }
             catch
             {

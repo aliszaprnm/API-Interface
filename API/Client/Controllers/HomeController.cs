@@ -1,4 +1,5 @@
 ﻿using Client.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System;
@@ -17,13 +18,33 @@ namespace Client.Controllers
         {
             _logger = logger;
         }
-
         public IActionResult Index()
         {
             return View();
         }
-
+        [Authorize]
+        public IActionResult Dashboard()
+        {
+            return View();
+        }
+        [Authorize]
+        public IActionResult DataTable()
+        {
+            return View();
+        }
+        public IActionResult Login()
+        {
+            return View();
+        }
+        public IActionResult InvalidLogin()
+        {
+            return View();
+        }
         public IActionResult Ajax()
+        {
+            return View();
+        }
+        public IActionResult Grid()
         {
             return View();
         }

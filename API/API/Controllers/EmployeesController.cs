@@ -61,7 +61,7 @@ namespace API.Controllers
             return Ok(new { status = HttpStatusCode.OK, result = result, message = "Data berhasil dimasukkan" });
         }
 
-        [Authorize(Roles = "Director, Manager")]
+        /*[Authorize(Roles = "Director, Manager")]*/
         [Route("Profile")]
         [HttpGet]
         public ActionResult<RegisterVM> GetProfile()
@@ -69,7 +69,7 @@ namespace API.Controllers
             var getProfile = employeeRepository.GetProfile();
             if (getProfile.ToList().Count > 0)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = getProfile, message = "Data berhasil ditampilkan" });
+                return Ok(getProfile);
             }
             else
             {
@@ -113,10 +113,11 @@ namespace API.Controllers
         [HttpGet("Profile/{NIK}")]
         public ActionResult GetProfil(string NIK)
         {
-            var get = employeeRepository.Get(NIK);
+            var get = employeeRepository.GetProfil(NIK);
             if (get != null)
             {
-                return Ok(new { status = HttpStatusCode.OK, result = get, message = "Data berhasil ditampilkan" });
+                /*return Ok(new { status = HttpStatusCode.OK, result = get, message = "Data berhasil ditampilkan" });*/
+                return Ok(get);
             }
             else
             {
@@ -188,11 +189,11 @@ namespace API.Controllers
                 );
             var idToken = new JwtSecurityTokenHandler().WriteToken(token);
             claims.Add(new Claim("TokenSecurity", idToken.ToString()));
-            return Ok(new
+            return Ok(new JWTokenVM
             {
-                status = HttpStatusCode.OK,
-                tokenId = idToken,
-                message = "Login berhasil"
+                /*Status = HttpStatusCode.OK,*/
+                Token = idToken,
+                Message = "Login berhasil"
             });
         }
 
@@ -203,8 +204,80 @@ namespace API.Controllers
             return Ok("Test JWT Berhasil");
         }
 
-        /*[Authorize]
-        [HttpGet]*/
+        [Route("Gender")]
+        [HttpGet]
+        public ActionResult<RegisterVM> GetGender()
+        {
+            var getGender = employeeRepository.GetGender();
+            if (getGender != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = getGender, message = "Data berhasil ditampilkan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, result = getGender, message = "Tidak ada data di sini" });
+            }
+        }
+
+        [Route("GetRole")]
+        [HttpGet]
+        public ActionResult<RegisterVM> GetRole()
+        {
+            var getRole = employeeRepository.GetRole();
+            if (getRole != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = getRole, message = "Data berhasil ditampilkan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, result = getRole, message = "Tidak ada data di sini" });
+            }
+        }
+
+        [Route("GetSalary")]
+        [HttpGet]
+        public ActionResult<RegisterVM> GetSalary()
+        {
+            var getSalary = employeeRepository.GetSalary();
+            if (getSalary != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = getSalary, message = "Data berhasil ditampilkan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, result = getSalary, message = "Tidak ada data di sini" });
+            }
+        }
+
+        [Route("GetSalary2")]
+        [HttpGet]
+        public ActionResult<RegisterVM> GetSalary2()
+        {
+            var getSalary2 = employeeRepository.GetSalary2();
+            if (getSalary2 != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = getSalary2, message = "Data berhasil ditampilkan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, result = getSalary2, message = "Tidak ada data di sini" });
+            }
+        }
+
+        [Route("GetDegree")]
+        [HttpGet]
+        public ActionResult<RegisterVM> GetDegree()
+        {
+            var getDegree = employeeRepository.GetDegree();
+            if (getDegree != null)
+            {
+                return Ok(new { status = HttpStatusCode.OK, result = getDegree, message = "Data berhasil ditampilkan" });
+            }
+            else
+            {
+                return NotFound(new { status = HttpStatusCode.NotFound, result = getDegree, message = "Tidak ada data di sini" });
+            }
+        }
     }
 
     /*public class EmployeesController : ControllerBase

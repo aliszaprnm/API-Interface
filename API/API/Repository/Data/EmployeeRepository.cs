@@ -2,6 +2,7 @@
 using API.Models;
 using API.ViewModel;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -110,7 +111,7 @@ namespace API.Repository.Data
                          }).ToList();
             return query;
         }
-        public RegisterVM GetProfil(string NIK)
+        public IEnumerable<RegisterVM> GetProfil(string NIK)
         {
             var query = (from e in myContext.Employees
                          join a in myContext.Accounts on e.NIK equals a.NIK
@@ -135,7 +136,7 @@ namespace API.Repository.Data
                              GPA = ed.GPA,
                              UniversityId = ed.UniversityId,
                              RoleId = r.RoleId
-                         }).Where(e => e.NIK == NIK).FirstOrDefault();
+                         }).Where(e => e.NIK == NIK).ToList();
             return query;
         }
         public int Login(LoginVM loginVM)
@@ -174,6 +175,89 @@ namespace API.Repository.Data
             return result;
         }
 
+        public IEnumerable GetGender()
+        {
+            var result = from emp in myContext.Employees
+                         group emp by emp.Gender into x
+                         select new
+                         {
+                             gender = x.Key,
+                             value = x.Count()
+                         };
+            return result;
+        }
+
+        public IEnumerable GetRole()
+        {
+            var result = from ar in myContext.AccountRoles
+                         group ar by ar.RoleId into x
+                         select new
+                         {
+                             role = x.Key,
+                             value = x.Count()
+                         };
+            return result;
+        }
+
+        public IEnumerable GetSalary()
+        {
+            var result = from e in myContext.Employees
+                         group e by e.Salary into x
+                         select new
+                         {
+                             salary = x.Key,
+                             value = x.Count()
+                         };
+            return result;
+        }
+
+        public object[] GetSalary2()
+        {
+            var label1 = (from emp in myContext.Employees
+                          select new
+                          {
+                              label = "Rp2.000.000 - Rp5.000.000",
+                              value = myContext.Employees.Where(a => a.Salary <= 5000000 && a.Salary >= 2000000).Count()
+                          }).First();
+            var label2 = (from emp in myContext.Employees
+                          select new
+                          {
+                              label = "Rp5.000.001 - Rp10.000.000",
+                              value = myContext.Employees.Where(a => a.Salary <= 10000000 && a.Salary >= 5000001).Count()
+                          }).First();
+            var label3 = (from emp in myContext.Employees
+                          select new
+                          {
+                              label = "< Rp2.000.000",
+                              value = myContext.Employees.Where(a => a.Salary < 2000000).Count()
+                          }).First();
+            var label4 = (from emp in myContext.Employees
+                          select new
+                          {
+                              label = "> Rp10.000.000",
+                              value = myContext.Employees.Where(a => a.Salary > 10000000).Count()
+                          }).First();
+            List<Object> result = new List<Object>();
+            result.Add(label3);
+            result.Add(label1);
+            result.Add(label2);
+            result.Add(label4);
+            return result.ToArray();
+        }
+
+        public IEnumerable GetDegree()
+        {
+            var result = from p in myContext.Profilings
+                         join e in myContext.Educations
+                         on p.EducationId equals e.EducationId
+                         group e by e.Degree into x
+                         select new
+                         {
+                             degree = x.Key,
+                             value = x.Count()
+                         };
+            return result;
+        }
         /*public IEnumerable<RegisterVM> GetEmployeeProfile()
         {
             var query = (from e in myContext.Employees
